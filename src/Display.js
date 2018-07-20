@@ -19,7 +19,10 @@ class Display extends Component {
         </thead>
         <tbody>
           {this.props.data.map(book => {
-              return <TableRow key={book.id} title={book.title} author={book.author} />
+              return (<TableRow key={book.id} 
+                              title={book.title} 
+                              author={`${book.author.firstName}
+                                      ${book.author.lastName}`} />);
             })}
         </tbody>
       </table>

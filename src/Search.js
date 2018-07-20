@@ -54,7 +54,7 @@ class Search extends Component {
           <option value="title">Title</option>
           <option value="author">Author</option>
         </select>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Search" />
       </form>
     );
   }
