@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import TableRow from './TableRow.js';
+
 class Display extends Component {
 
   componentWillReceiveProps(newProp) {
@@ -17,10 +19,7 @@ class Display extends Component {
         </thead>
         <tbody>
           {this.props.data.map(book => {
-              return (<tr>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-              </tr>)
+              return <TableRow key={book.id} title={book.title} author={book.author} />
             })}
         </tbody>
       </table>

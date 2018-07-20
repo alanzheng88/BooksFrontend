@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
-const API_KEY = 'a1b2c3d4e5f6';
+const API_URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 class Search extends Component {
   constructor(props) {
