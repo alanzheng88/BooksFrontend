@@ -7,7 +7,10 @@ const API_KEY = 'a1b2c3d4e5f6';
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = { query: '' };
+    this.state = { 
+      query: '',
+      selectedFilter: '',
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,18 +19,18 @@ class Search extends Component {
 
   handleInputChange(event) {
     this.setState({
-      query: this.search.value
+      query: this.search.value,
+      selectedFilter: this.dropdown.value,
     })
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    alert('button was clicked: ' + this.state.query);
+    event.preventDefault(); 
     this.getInfo();
   }
 
   getInfo() {
-    axios.get(`${API_URL}/books?api_key=${API_KEY}&title=${this.state.query}&limit=7`)
+    axios.get(`${API_URL}/books?api_key=${API_KEY}&${this.state.selectedFilter}=${this.state.query}&limit=7`)
         .then(response => {
           this.props.searchDataCallback(response.data)
         })
@@ -37,12 +40,20 @@ class Search extends Component {
   }
 
   render() {
+
     return (
       <form onSubmit={this.handleSubmit}>
         <input
           placeholder="Search for ..."
-          ref={input => this.search = input}
+          ref={element => this.search = element}
           onChange={this.handleInputChange} />
+        <select 
+            name="filterOption"
+            defaultValue="title"
+            ref={element => this.dropdown = element}>
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+        </select>
         <input type="submit" value="Submit" />
       </form>
     );

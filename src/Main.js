@@ -11,9 +11,7 @@ class Main extends Component {
   }
 
   handleSearchData(searchData) {
-    console.log(searchData);
     this.setState({data: searchData});
-    debugger
   }
 
   render() {
