@@ -10,22 +10,23 @@ class Display extends Component {
 
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.data.map(book => {
-              return (<TableRow key={book.id} 
-                              title={book.title} 
-                              author={`${book.author.firstName}
-                                      ${book.author.lastName}`} />);
-            })}
-        </tbody>
-      </table>
+      <div className="container">
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.data.map(book => {
+                return (<TableRow key={book.id} 
+                                title={book.title} 
+                                author={book.author} />);
+              })}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

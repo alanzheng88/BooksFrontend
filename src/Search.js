@@ -43,18 +43,29 @@ class Search extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          placeholder="Search for ..."
-          ref={element => this.search = element}
-          onChange={this.handleInputChange} />
-        <select 
-            name="filterOption"
-            defaultValue="title"
-            ref={element => this.dropdown = element}>
-          <option value="title">Title</option>
-          <option value="author">Author</option>
-        </select>
-        <input type="submit" value="Search" />
+        <div class="form-row">
+          <div className="form-group col-xs-12 col-md-8">
+            <input
+              className="form-control"
+              placeholder="Search for ..."
+              ref={element => this.search = element}
+              onChange={this.handleInputChange} />
+          </div>
+          <div className="form-group col-xs-12 col-md-2">
+            <select
+                className="form-control"
+                name="filterOption"
+                defaultValue="title"
+                ref={element => this.dropdown = element}>
+              <option value="title">Title</option>
+              <option value="author" disabled>Author</option>
+            </select>
+          </div>
+          <div className="form-group col-xs-12 col-md-2 ">
+           <input className="btn btn-primary" 
+                type="submit" value="Search" />
+          </div>
+        </div>
       </form>
     );
   }
