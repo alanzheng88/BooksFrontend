@@ -2,7 +2,7 @@
 
 ![book demo](https://github.com/alanzheng88/BooksFrontend/blob/master/public/static/images/demo.png)
 
-Usage
+## Usage
 1. Run the following
 ```
 npm install
