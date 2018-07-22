@@ -36,6 +36,7 @@ class Search extends Component {
         })
         .catch(error => {
           console.error(error);
+          alert(error)
         });
   }
 
@@ -43,7 +44,7 @@ class Search extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <div class="form-row">
+        <div className="form-row">
           <div className="form-group col-xs-12 col-md-8">
             <input
               className="form-control"
