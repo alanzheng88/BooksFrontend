@@ -34,7 +34,6 @@ class Main extends Component {
     return (
       <div className="container">
         <h1>Books</h1>
-        <p>** Author info is not yet supported **</p>
         <Search searchDataCallback={this.handleSearchData} />
         <Display data={this.state.data} />
       </div>
