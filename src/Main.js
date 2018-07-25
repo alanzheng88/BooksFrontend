@@ -32,7 +32,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Books</h1>
         <p>** Author info is not yet supported **</p>
         <Search searchDataCallback={this.handleSearchData} />
