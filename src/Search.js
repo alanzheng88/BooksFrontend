@@ -30,7 +30,7 @@ class Search extends Component {
   }
 
   getInfo() {
-    axios.get(`${API_URL}/books?api_key=${API_KEY}&${this.state.selectedFilter}=${this.state.query}&limit=7`)
+    axios.get(`${API_URL}/books/?api_key=${API_KEY}&${this.state.selectedFilter}=${this.state.query}&limit=7`)
         .then(response => {
           this.props.searchDataCallback(response.data)
         })

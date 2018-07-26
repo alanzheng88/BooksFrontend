@@ -17,7 +17,7 @@ class Main extends Component {
   // invoked immediately after component is mounted (inserted into tree)
   // load data from remote endpoint
   componentDidMount() {
-    axios.get(`${API_URL}/books?api_key=${API_KEY}`)
+    axios.get(`${API_URL}/books/?api_key=${API_KEY}`)
         .then(response => {
           this.setState({data: response.data});
         })
