@@ -9,18 +9,24 @@ class Search extends Component {
     super(props);
     this.state = { 
       query: '',
-      selectedFilter: '',
+      selectedFilter: 'title',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getInfo = this.getInfo.bind(this);
   }
 
   handleInputChange(event) {
     this.setState({
-      query: this.search.value,
-      selectedFilter: this.dropdown.value,
+      query: this.search.value
+    })
+  }
+
+  handleDropdownChange(event) {
+    this.setState({
+      selectedFilter: this.dropdown.value  
     })
   }
 
@@ -57,9 +63,10 @@ class Search extends Component {
                 className="form-control"
                 name="filterOption"
                 defaultValue="title"
-                ref={element => this.dropdown = element}>
+                ref={element => this.dropdown = element}
+                onChange={this.handleDropdownChange}>
               <option value="title">Title</option>
-              <option value="author" disabled>Author</option>
+              <option value="author">Author</option>
             </select>
           </div>
           <div className="form-group col-xs-12 col-md-2 ">
