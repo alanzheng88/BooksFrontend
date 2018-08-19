@@ -7,11 +7,13 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 class Search extends Component {
   constructor(props) {
     super(props);
+
     this.state = { 
       query: '',
       selectedFilter: 'title',
     };
 
+    this.limit = props.limit
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,18 +38,23 @@ class Search extends Component {
   }
 
   getInfo() {
-    axios.get(`${API_URL}/books/?api_key=${API_KEY}&${this.state.selectedFilter}=${this.state.query}&limit=7`)
+    let url = `${API_URL}/books/?` +
+              `api_key=${API_KEY}&` +
+              `${this.state.selectedFilter}=${this.state.query}&`+
+              `limit=${this.props.limit}&` +
+              `after-id=0`;
+    console.log(`search url: ${url}`);
+    axios.get(url)
         .then(response => {
-          this.props.searchDataCallback(response.data)
+          this.props.searchDataCallback(response.data, url);
         })
         .catch(error => {
           console.error(error);
-          alert(error)
+          alert(error);
         });
   }
 
   render() {
-
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-row">
