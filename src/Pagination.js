@@ -7,8 +7,9 @@ class Pagination extends Component {
     super(props);
 
     this.state = {
+      bookIds: props.bookIds,
       page: 1,
-      nextUrl: '',
+      dataEntriesCount: -1,
     };
 
     this.handlePreviousButton = this.handlePreviousButton.bind(this);
@@ -17,48 +18,78 @@ class Pagination extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.state.nextUrl !== newProps.nextUrl) {
-      this.setState({nextUrl: newProps.nextUrl});
+    if (this.state.lastUrl !== newProps.lastUrl) {
+      this.setState({lastUrl: newProps.lastUrl});
+    }
+
+    if (this.state.dataEntriesCount 
+          !== newProps.dataEntriesCount) {
+      this.setState({dataEntriesCount: newProps.dataEntriesCount});
+    }
+
+    if (this.state.bookIds.length
+          !== newProps.bookIds.length) {
+      this.setState({bookIds: newProps.bookIds});
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.page !== prevState.page) {
+    if (this.state.bookIds !== prevState.bookIds) {
       this.getInfo();
     }
   }
 
   handlePreviousButton() {
-    if (this.state.page > 1) {
+    if (this.state.bookIds.length > 1) {
+      let prevId = this.state.bookIds[this.state.bookIds.length-2];
+      let parsedUrl = new URL(this.state.lastUrl, true);
+      parsedUrl.query['after-id'] = prevId;
+      let url = parsedUrl.toString();
+      console.dir(this.state.bookIds);
       this.setState((prevState) => {
         return {
           page: prevState.page - 1,
+          bookIds: prevState
+                      .bookIds
+                      .slice(0, prevState.bookIds.length-1),
+          url,
         };
       });
     }
   }
 
   handleNextButton() {
+    let parsedUrl = new URL(this.state.lastUrl, true);
+    let nextId = this.state.dataEntriesCount;
+    parsedUrl.query['after-id'] = nextId;
+    let url = parsedUrl.toString();
     this.setState((prevState) => {
+      console.log(prevState);
       return {
         page: prevState.page + 1,
+        bookIds: prevState.bookIds.concat([nextId]),
+        url,
       };
     });
-    this.url = this.state.nextUrl;
   }
 
   getInfo() {
+    if (!this.state.url) {
+      // url property is not set on the first componentAtUpdate
+      return;
+    }
     console.log(`page is: ${this.state.page}`);
-    console.log(`pagination url: ${this.url}`);
-    let url = this.url;
+    console.log(`pagination url: ${this.state.url}`);
+    let url = this.state.url;
     axios.get(url)
         .then(response => {
           let data = response.data;
-          this.props.searchDataCallback(data, url);
+          this.props.searchDataCallback(
+            data, url, 'pagination', this.state.bookIds);
         })
         .catch(error => {
           console.error(error);
-          alert(error)
+          alert(error);
         });
   }
 

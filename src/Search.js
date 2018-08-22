@@ -46,7 +46,7 @@ class Search extends Component {
     console.log(`search url: ${url}`);
     axios.get(url)
         .then(response => {
-          this.props.searchDataCallback(response.data, url);
+          this.props.searchDataCallback(response.data, url, 'search');
         })
         .catch(error => {
           console.error(error);

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import URL from 'url-parse';
 
 import Search from "./Search";
 import Display from "./Display";
@@ -14,10 +13,9 @@ class Main extends Component {
     super(props);
     this.handleSearchData = this.handleSearchData.bind(this);
     this.limit = 9;
-    this.lastIds = [];
     this.state = {
+      bookIds: [0],
       data: [],
-      nextUrl: '',
     }
   }
 
@@ -32,28 +30,26 @@ class Main extends Component {
     axios.get(url)
         .then(response => {
           let data = response.data;
-          this.handleSearchData(data, url);
+          this.handleSearchData(data, url, 'search');
         })
         .catch(error => {
           console.error(error);
         });
   }
 
-  handleSearchData(data, lastUrl) {
-    let afterId = data[data.length-1].id;
-    let prevUrl = '';
-    let hasNewAfterId = this.lastIds.indexOf(afterId) === -1;
-    if (hasNewAfterId) {
-      this.lastIds.push(afterId);
+  handleSearchData(data, lastUrl, task, lastBookIds=null) {
+    let bookIds;
+    if (task === 'search') {
+      bookIds = [0];
+    } else {
+      bookIds = lastBookIds || this.state.bookIds;
     }
-    let parsedUrl = new URL(lastUrl, true);
-    parsedUrl.query['after-id'] = afterId;
-    let nextUrl = parsedUrl.toString();
-    console.log(`next url: ${nextUrl}`);
+    let dataEntriesCount = data[data.length-1].id;
     this.setState({
       data,
-      prevUrl,
-      nextUrl,
+      lastUrl,
+      dataEntriesCount,
+      bookIds,
     });
   }
 
@@ -66,7 +62,9 @@ class Main extends Component {
           searchDataCallback={this.handleSearchData} />
         <Pagination
           limit={this.limit}
-          nextUrl={this.state.nextUrl}
+          bookIds={this.state.bookIds}
+          lastUrl={this.state.lastUrl}
+          dataEntriesCount={this.state.dataEntriesCount}
           searchDataCallback={this.handleSearchData} />
         <Display data={this.state.data} />
       </div>
