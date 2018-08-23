@@ -31,10 +31,15 @@ class Pagination extends Component {
           !== newProps.bookIds.length) {
       this.setState({bookIds: newProps.bookIds});
     }
+
+    if (this.state.task !== newProps.task) {
+      this.setState({task: newProps.task});
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.bookIds !== prevState.bookIds) {
+    if (this.state.bookIds !== prevState.bookIds
+          && this.state.task === 'pagination') {
       this.getInfo();
     }
   }
@@ -48,6 +53,7 @@ class Pagination extends Component {
       console.dir(this.state.bookIds);
       this.setState((prevState) => {
         return {
+          task: 'pagination',
           page: prevState.page - 1,
           bookIds: prevState
                       .bookIds
@@ -66,6 +72,7 @@ class Pagination extends Component {
     this.setState((prevState) => {
       console.log(prevState);
       return {
+        task: 'pagination',
         page: prevState.page + 1,
         bookIds: prevState.bookIds.concat([nextId]),
         url,

@@ -50,6 +50,7 @@ class Main extends Component {
       lastUrl,
       dataEntriesCount,
       bookIds,
+      task,
     });
   }
 
@@ -64,6 +65,7 @@ class Main extends Component {
           limit={this.limit}
           bookIds={this.state.bookIds}
           lastUrl={this.state.lastUrl}
+          task={this.state.task}
           dataEntriesCount={this.state.dataEntriesCount}
           searchDataCallback={this.handleSearchData} />
         <Display data={this.state.data} />
