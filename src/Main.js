@@ -56,18 +56,20 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h1>Books</h1>
-        <Search
-          limit={this.limit}
-          searchDataCallback={this.handleSearchData} />
-        <Pagination
-          limit={this.limit}
-          bookIds={this.state.bookIds}
-          lastUrl={this.state.lastUrl}
-          task={this.state.task}
-          dataEntriesCount={this.state.dataEntriesCount}
-          searchDataCallback={this.handleSearchData} />
+      <div>
+        <div className="container">
+          <h1>Books</h1>
+          <Search
+            limit={this.limit}
+            searchDataCallback={this.handleSearchData} />
+          <Pagination
+            limit={this.limit}
+            bookIds={this.state.bookIds}
+            lastUrl={this.state.lastUrl}
+            task={this.state.task}
+            dataEntriesCount={this.state.dataEntriesCount}
+            searchDataCallback={this.handleSearchData} />
+        </div>
         <Display data={this.state.data} />
       </div>
     );
