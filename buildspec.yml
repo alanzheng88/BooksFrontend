@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Building dependencies
+      - npm install 2>&1 | tee books_client-prod-install.log
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Running build
+      - npm run build 2>&1 | tee books_client-prod-build.log
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - books_client-prod-install.log
+    - books_client-prod-build.log
