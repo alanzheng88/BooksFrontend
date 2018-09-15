@@ -15,7 +15,3 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-artifacts:
-  files:
-    - books_client-prod-install.log
-    - books_client-prod-build.log
