@@ -18,5 +18,5 @@ phases:
 artifacts:
   files:
     - 'build/*'
-    - build/books_client-prod-install.log
-    - build/books_client-prod-build.log
+    - books_client-prod-install.log
+    - books_client-prod-build.log
