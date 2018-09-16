@@ -1,0 +1,12 @@
+version: 1.0
+os: linux
+files:
+  - source: build
+    destination: /vagrant/client/build
+hooks:
+  BeforeInstall:
+    - location: scripts/before_install.sh
+  AfterInstall:
+    - location: scripts/after_install.sh
+  ApplicationStart:
+    - location: scripts/application_start.sh
