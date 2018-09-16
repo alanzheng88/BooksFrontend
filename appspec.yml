@@ -10,3 +10,5 @@ hooks:
     - location: scripts/after_install.sh
   ApplicationStart:
     - location: scripts/application_start.sh
+  ValidateService:
+    - location: scripts/validate.sh
