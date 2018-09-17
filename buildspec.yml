@@ -20,3 +20,4 @@ artifacts:
     - 'build/*'
     - books_client-prod-install.log
     - books_client-prod-build.log
+    - appspec.yml
