@@ -26,7 +26,7 @@ class Main extends Component {
               `api_key=${API_KEY}&` +
               `limit=${this.limit}&` +
               `after-id=0`;
-    console.log(`main url: ${url}`);
+    // console.log(`main url: ${url}`);
     axios.get(url)
         .then(response => {
           let data = response.data;
@@ -38,6 +38,11 @@ class Main extends Component {
   }
 
   handleSearchData(data, lastUrl, task, lastBookIds=null) {
+    if (data.length === 0) {
+      alert('The search criteria you provided is invalid or not supported');
+      console.error('No data returned from server');
+      return;
+    } 
     let bookIds;
     if (task === 'search') {
       bookIds = [0];

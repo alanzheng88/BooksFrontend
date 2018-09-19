@@ -70,7 +70,7 @@ class Pagination extends Component {
     parsedUrl.query['after-id'] = nextId;
     let url = parsedUrl.toString();
     this.setState((prevState) => {
-      console.log(prevState);
+      // console.log(prevState);
       return {
         task: 'pagination',
         page: prevState.page + 1,
@@ -85,8 +85,8 @@ class Pagination extends Component {
       // url property is not set on the first componentAtUpdate
       return;
     }
-    console.log(`page is: ${this.state.page}`);
-    console.log(`pagination url: ${this.state.url}`);
+    // console.log(`page is: ${this.state.page}`);
+    // console.log(`pagination url: ${this.state.url}`);
     let url = this.state.url;
     axios.get(url)
         .then(response => {

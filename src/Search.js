@@ -43,14 +43,13 @@ class Search extends Component {
               `${this.state.selectedFilter}=${this.state.query}&`+
               `limit=${this.props.limit}&` +
               `after-id=0`;
-    console.log(`search url: ${url}`);
+    // console.log(`search url: ${url}`);
     axios.get(url)
         .then(response => {
           this.props.searchDataCallback(response.data, url, 'search');
         })
         .catch(error => {
           console.error(error);
-          alert(error);
         });
   }
 
