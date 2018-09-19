@@ -11,7 +11,7 @@ phases:
   build:
     commands:
       - echo Running build
-      - npm run build 2>&1 | tee books_client-prod-build.log
+      - REACT_APP_API_URL=$REACT_APP_API_URL REACT_APP_API_KEY=$REACT_APP_API_KEY npm run build 2>&1 | tee books_client-prod-build.log
   post_build:
     commands:
       - echo Build completed on `date`
