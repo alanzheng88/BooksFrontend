@@ -49,8 +49,7 @@ class Pagination extends Component {
       let prevId = this.state.bookIds[this.state.bookIds.length-2];
       let parsedUrl = new URL(this.state.lastUrl, true);
       parsedUrl.query['after-id'] = prevId;
-      let url = parsedUrl.toString();
-      console.dir(this.state.bookIds);
+      let url = parsedUrl.toString(); 
       this.setState((prevState) => {
         return {
           task: 'pagination',
